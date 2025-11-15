@@ -36,8 +36,27 @@
 <!-- لوحة الأدمن -->
 <div class="container hidden" id="adminPanel">
     <h2>لوحة التحكم للأدمن</h2>
-    <p>مرحباً بك يا <strong>admin</strong></p>
-    <p>يمكنك إدارة الموقع.</p>
+    
+    <h3>إدارة روابط مواقع التواصل</h3>
+    <input type="text" id="platform" placeholder="اسم المنصة">
+    <input type="text" id="link" placeholder="الرابط">
+    <button onclick="addLink()">إضافة الرابط</button>
+    <ul id="socialList"></ul>
+    
+    <h3>إدارة الأخبار</h3>
+    <input type="text" id="newsTitle" placeholder="عنوان الخبر">
+    <textarea id="newsContent" rows="4" placeholder="نص الخبر"></textarea>
+    <button onclick="addNews()">نشر الخبر</button>
+    <div id="newsContainer"></div>
+    
+    <h3>رفع صور الموقع والشعار (تجريبي)</h3>
+    <label>صورة الموقع</label>
+    <input type="file" id="siteImage">
+    <label>اللوجو</label>
+    <input type="file" id="logoImage">
+    <button onclick="saveImages()">حفظ الصور</button>
+    
+    <br><br>
     <button onclick="logout()">تسجيل الخروج</button>
 </div>
 
