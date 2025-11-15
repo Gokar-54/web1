@@ -1,53 +1,62 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f3f3f3;
+    background: #f2f2f2;
     margin:0;
-}
-
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
     text-align:center;
 }
 
-input, button {
-    width:100%;
-    padding:10px;
+.logo-container {
+    margin-top: 20px;
+}
+
+.rotating-logo {
+    width: 120px;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.site-image-container {
+    margin-top: 20px;
+}
+
+.site-image {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.social-container {
+    margin-top: 30px;
+    background:#fff;
+    padding:20px;
+    width:90%;
+    max-width:400px;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.social-container ul {
+    list-style:none;
+    padding:0;
+}
+
+.social-container li {
     margin:10px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
 }
 
-button {
-    background:#007bff;
-    color:white;
-    border:none;
-    cursor:pointer;
-}
-
-button:hover {
-    background:#0056b3;
-}
-
-a {
-    color:#007bff;
+.social-container a {
     text-decoration:none;
+    color:#007bff;
+    font-size:18px;
 }
 
-a:hover {
+.social-container a:hover {
     text-decoration:underline;
-}
-
-.error {
-    color:red;
-    font-size:14px;
-}
-
-.hidden {
-    display:none;
 }
