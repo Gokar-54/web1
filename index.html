@@ -1,25 +1,64 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>لوحة تحكم الأدمن</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>تسجيل الدخول</h2>
-        <form id="loginForm">
-            <label for="username">اسم المستخدم:</label>
-            <input type="text" id="username" required>
 
-            <label for="password">كلمة المرور:</label>
-            <input type="password" id="password" required>
+<header>
+    <h1>لوحة تحكم الإدارة</h1>
+</header>
 
-            <button type="submit">تسجيل الدخول</button>
-            <p id="errorMsg" class="error"></p>
-        </form>
+<div class="container">
+
+    <!-- إدارة روابط مواقع التواصل -->
+    <div class="card">
+        <h2>إدارة روابط مواقع التواصل</h2>
+
+        <h3>إضافة رابط جديد</h3>
+        <input type="text" id="platform" placeholder="اسم المنصة">
+        <input type="text" id="link" placeholder="الرابط">
+        <button onclick="addLink()">إضافة الرابط</button>
+
+        <h3>جميع الروابط</h3>
+        <ul class="social-list" id="socialList">
+            <!-- الروابط ستظهر هنا -->
+        </ul>
     </div>
-    <script src="script.js"></script>
+
+    <!-- إدارة الأخبار -->
+    <div class="card">
+        <h2>إدارة الأخبار</h2>
+
+        <h3>نشر خبر جديد</h3>
+        <input type="text" id="newsTitle" placeholder="عنوان الخبر">
+        <textarea id="newsContent" rows="5" placeholder="نص الخبر"></textarea>
+        <button onclick="addNews()">نشر الخبر</button>
+
+        <h3>الأخبار المنشورة</h3>
+        <div id="newsContainer">
+            <!-- الأخبار ستظهر هنا -->
+        </div>
+    </div>
+
+    <!-- تعديل صور الموقع والشعار -->
+    <div class="card">
+        <h2>تغيير صورة الموقع والشعار</h2>
+        <label>صورة رئيسية للموقع</label>
+        <input type="file" id="siteImage">
+
+        <label>اللوجو</label>
+        <input type="file" id="logoImage">
+
+        <button onclick="saveImages()">حفظ التعديلات</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
